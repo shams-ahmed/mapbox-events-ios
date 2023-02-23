@@ -5,7 +5,7 @@ import PackageDescription
 import Foundation
 
 let registry = SDKRegistry()
-let version = "1.0.10"
+let version = "1.2.3"
 let checksum = "a23a14c445a4d4b81184ad22e778810034b6e82999a6eba21617e76a5cf0f991"
 
 let package = Package(

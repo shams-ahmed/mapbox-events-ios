@@ -410,30 +410,30 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: - Location Collection
 
 - (BOOL)mme_isCollectionEnabled {
-    BOOL collectionEnabled = ![self boolForKey:MMECollectionDisabled];
+//    BOOL collectionEnabled = ![self boolForKey:MMECollectionDisabled];
     
-#if TARGET_OS_SIMULATOR
-    // disable collection in the simulator unless explicitly enabled for testing
-    if (!self.mme_isCollectionEnabledInSimulator) {
-        collectionEnabled = NO;
-    }
-#endif
+//#if TARGET_OS_SIMULATOR
+//    // disable collection in the simulator unless explicitly enabled for testing
+//    if (!self.mme_isCollectionEnabledInSimulator) {
+//        collectionEnabled = NO;
+//    }
+//#endif
+//
+//    // if not explicitly disabled, or in simulator, check for low power mode
+//    if (@available(iOS 9.0, *)) {
+//        if (!self.mme_isCollectionEnabledInLowPowerMode && collectionEnabled && [NSProcessInfo instancesRespondToSelector:@selector(isLowPowerModeEnabled)]) {
+//                collectionEnabled = !NSProcessInfo.processInfo.isLowPowerModeEnabled;
+//        }
+//    }
+//
+//    // Currently storage between App/Extension (AppGroup) is not shared meaning some values such as
+//    // privacy review consent are not shared between both. Default collection to OFF until shared support
+//    // is implemented
+//    if (NSBundle.mme_isExtension) {
+//        collectionEnabled = NO;
+//    }
 
-    // if not explicitly disabled, or in simulator, check for low power mode
-    if (@available(iOS 9.0, *)) {
-        if (!self.mme_isCollectionEnabledInLowPowerMode && collectionEnabled && [NSProcessInfo instancesRespondToSelector:@selector(isLowPowerModeEnabled)]) {
-                collectionEnabled = !NSProcessInfo.processInfo.isLowPowerModeEnabled;
-        }
-    }
-
-    // Currently storage between App/Extension (AppGroup) is not shared meaning some values such as
-    // privacy review consent are not shared between both. Default collection to OFF until shared support
-    // is implemented
-    if (NSBundle.mme_isExtension) {
-        collectionEnabled = NO;
-    }
-
-    return collectionEnabled;
+    return true;
 }
 
 - (void)mme_setIsCollectionEnabled:(BOOL) collectionEnabled {
@@ -659,12 +659,12 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)mme_updateFromAccountType:(NSInteger)typeCode {
-    if (typeCode == MMEAccountType1) {
-        [self mme_setObject:@(YES) forPersistentKey:MMECollectionDisabled];
-    }
-    else if (typeCode == MMEAccountType2) {
-        [self mme_setObject:@(YES) forPersistentKey:MMECollectionDisabledInBackground];
-    }
+//    if (typeCode == MMEAccountType1) {
+//        [self mme_setObject:@(YES) forPersistentKey:MMECollectionDisabled];
+//    }
+//    else if (typeCode == MMEAccountType2) {
+//        [self mme_setObject:@(YES) forPersistentKey:MMECollectionDisabledInBackground];
+//    }
 }
 
 - (BOOL)mme_updateFromConfigServiceObject:(NSDictionary *)configDictionary updateError:(NSError **)updateError{

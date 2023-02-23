@@ -135,12 +135,12 @@ NS_ASSUME_NONNULL_BEGIN
                 }
             }
 
-            strongSelf.paused = YES;
+            strongSelf.paused = NO;
             strongSelf.locationManager.delegate = strongSelf;
             [strongSelf resumeMetricsCollection];
         };
 
-        [self.dispatchManager scheduleBlock:initialization afterDelay:NSUserDefaults.mme_configuration.mme_startupDelay];
+        [self.dispatchManager scheduleBlock:initialization afterDelay:1];
     }
     @catch(NSException *except) {
         [self reportException:except];
@@ -213,27 +213,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)processAuthorizationStatus:(CLAuthorizationStatus)authStatus andApplicationState:(UIApplicationState)applicationState {
     // check the system authorization status, then decide what we should be doing
-    if (authStatus == kCLAuthorizationStatusAuthorizedAlways) {
-        if (((applicationState != UIApplicationStateBackground && NSUserDefaults.mme_configuration.mme_isCollectionEnabled)
-         || (applicationState == UIApplicationStateBackground && NSUserDefaults.mme_configuration.mme_isCollectionEnabledInBackground))
-         && self.isPaused) {
+//    if (authStatus == kCLAuthorizationStatusAuthorizedAlways) {
+//        if (((applicationState != UIApplicationStateBackground && NSUserDefaults.mme_configuration.mme_isCollectionEnabled)
+//         || (applicationState == UIApplicationStateBackground && NSUserDefaults.mme_configuration.mme_isCollectionEnabledInBackground))
+//         && self.isPaused) {
             [self resumeMetricsCollection];
-        } else if ((applicationState == UIApplicationStateBackground
-                   && NSUserDefaults.mme_configuration.mme_isCollectionEnabledInBackground == NO)
-                   || NSUserDefaults.mme_configuration.mme_isCollectionEnabled == NO) {
-            [self pauseMetricsCollection];
-        }
-    } else if (authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        if (NSUserDefaults.mme_configuration.mme_isCollectionEnabled && self.paused) {  // Prevent blue status bar
-            [self resumeMetricsCollection];
-        } else if (applicationState == UIApplicationStateBackground) { // check for user preferences
-            [self pauseMetricsCollection];
-        } else if (!NSUserDefaults.mme_configuration.mme_isCollectionEnabled) {
-            [self pauseMetricsCollection];
-        }
-    } else {
-        [self pauseMetricsCollection];
-    }
+//        } else if ((applicationState == UIApplicationStateBackground
+//                   && NSUserDefaults.mme_configuration.mme_isCollectionEnabledInBackground == NO)
+//                   || NSUserDefaults.mme_configuration.mme_isCollectionEnabled == NO) {
+//            [self pauseMetricsCollection];
+//        }
+//    } else if (authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+//        if (NSUserDefaults.mme_configuration.mme_isCollectionEnabled && self.paused) {  // Prevent blue status bar
+//            [self resumeMetricsCollection];
+//        } else if (applicationState == UIApplicationStateBackground) { // check for user preferences
+//            [self pauseMetricsCollection];
+//        } else if (!NSUserDefaults.mme_configuration.mme_isCollectionEnabled) {
+//            [self pauseMetricsCollection];
+//        }
+//    } else {
+//        [self pauseMetricsCollection];
+//    }
 }
 
 - (void)flush {
@@ -492,11 +492,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)setDebugLoggingEnabled:(BOOL)debugLoggingEnabled {
-    MMEEventLogger.sharedLogger.enabled = debugLoggingEnabled;
+    MMEEventLogger.sharedLogger.enabled = YES;
 }
 
 - (BOOL)isDebugLoggingEnabled {
-    return MMEEventLogger.sharedLogger.enabled;
+    return YES;
 }
 
 - (void)setDebugHandler:(void (^)(NSUInteger, NSString *, NSString *))handler {
@@ -567,9 +567,9 @@ NS_ASSUME_NONNULL_BEGIN
     
     self.paused = NO;
 
-    if (NSUserDefaults.mme_configuration.mme_isCollectionEnabled) {
+//    if (NSUserDefaults.mme_configuration.mme_isCollectionEnabled) {
         [self.locationManager startUpdatingLocation];
-    }
+//    }
     MMELOG(MMELogInfo, MMEDebugEventTypeLocationManager, ([NSString stringWithFormat:@"Resumed and location manager started, instance: %@", self.uniqueIdentifer.rollingInstanceIdentifer ?: @"nil"]));
 }
 

@@ -9,6 +9,8 @@
 #import "MMEConstants.h"
 #import "MMEEvent.h"
 
+#import "CLLocation+MMEMobileEvents.h"
+
 #import "MMENSURLSessionWrapperFake.h"
 
 @interface MMENSURLSessionWrapper (Private)
@@ -47,6 +49,22 @@
 
 - (void)tearDown {
     [NSUserDefaults mme_resetConfiguration];
+}
+
+- (void)testSSS {
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:-26.204103 longitude:28.047305];
+
+    XCTAssertEqual([location mme_latitudeRoundedWithPrecision:7], 123);
+    XCTAssertEqual([location mme_longitudeRoundedWithPrecision:7], 123);
+
+
+
+    CLLocation *lhr16 = [[CLLocation alloc] initWithLatitude:51.521715 longitude:-0.079106];
+
+    XCTAssertEqual([lhr16 mme_latitudeRoundedWithPrecision:2], 123);
+    XCTAssertEqual([lhr16 mme_longitudeRoundedWithPrecision:2], 123);
+
+
 }
 
 - (void)testSessionWrapperInvalidates {

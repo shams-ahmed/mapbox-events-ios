@@ -31,6 +31,12 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Sources/MapboxMobileEvents/**/*.{h,m}'
 
+  s.pod_target_xcconfig = { 
+    'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_ROOT}/Sources/MapboxMobileEvents/include"',
+  }
+
+  # spec.header_mappings_dir = 'TSKit/include/**/*.h'
+
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 

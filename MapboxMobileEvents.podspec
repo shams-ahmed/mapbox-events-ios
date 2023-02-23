@@ -29,10 +29,12 @@ Pod::Spec.new do |s|
     :git => 'https://github.com/shams-ahmed/mapbox-events-ios.git', :tag => 'v1.2.3'
   }
 
+  s.source_files = 'Sources/MapboxMobileEvents/*.h', 'Sources/MapboxMobileEvents/*.m', 'Sources/MapboxMobileEvents/*.swift'
+
+
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.requires_arc = true
-  s.vendored_frameworks = 'MapboxMobileEvents.xcframework'
   s.module_name = s.name
 
 end

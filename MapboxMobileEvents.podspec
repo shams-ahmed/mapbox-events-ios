@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.source = {
-    :http => "https://api.mapbox.com/downloads/v2/mapbox-events-ios/releases/ios/packages/#{s.version.to_s}/MapboxMobileEvents.zip"
+    :git => 'https://github.com/shams-ahmed/mapbox-events-ios.git', :tag => 'v1.2.3'
   }
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

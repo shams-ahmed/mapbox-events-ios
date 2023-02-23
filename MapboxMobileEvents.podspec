@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
     :git => 'https://github.com/shams-ahmed/mapbox-events-ios.git', :tag => 'v1.2.3'
   }
 
-  s.source_files = 'Sources/MapboxMobileEvents/*.h', 'Sources/MapboxMobileEvents/*.m', 'Sources/MapboxMobileEvents/*.swift'
+  s.source_files = 'Sources/MapboxMobileEvents/**/*.{h,m}'
 
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
